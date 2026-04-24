@@ -80,7 +80,13 @@ img { max-width: 100%; display: block; }
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
-.nav-brand img { height: 36px; }
+.nav-brand img {
+  height: 40px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px 8px;
+  display: block;
+}
 .nav-links {
   display: flex;
   gap: 28px;
@@ -611,7 +617,12 @@ h2.center { text-align: center; }
   flex-wrap: wrap;
   gap: 20px;
 }
-.foot-logo { height: 28px; opacity: 0.8; }
+.foot-logo {
+  height: 36px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
 .foot-meta { color: var(--ink-dim); font-size: 13px; }
 
 /* ── ABOUT STATS (cream band) ───────────────────────── */
