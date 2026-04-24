@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 550" width="500" height="550">
+  <defs>
+    <!-- Neon glow filter for gold -->
+    <filter id="neonGold" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Neon glow for arch -->
+    <filter id="neonGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Text glow -->
+    <filter id="textGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="500" height="550" fill="#0A0A0A"/>
+
+  <!-- Arch/Canopy Frame - neon -->
+  <g transform="translate(250, 200)">
+    <!-- Outer arch -->
+    <path d="M-90 80 L-90 -20 Q-90 -110 0 -110 Q90 -110 90 -20 L90 80"
+          fill="none" stroke="#2EE6A8" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGreen)"/>
+    <!-- Inner arch -->
+    <path d="M-70 80 L-70 -10 Q-70 -90 0 -90 Q70 -90 70 -10 L70 80"
+          fill="none" stroke="#2EE6A8" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGreen)"/>
+
+    <!-- Divider lines -->
+    <line x1="0" y1="-108" x2="0" y2="-90" stroke="#2EE6A8" stroke-width="2" filter="url(#neonGreen)"/>
+    <line x1="-50" y1="-95" x2="-40" y2="-80" stroke="#2EE6A8" stroke-width="2" filter="url(#neonGreen)"/>
+    <line x1="50" y1="-95" x2="40" y2="-80" stroke="#2EE6A8" stroke-width="2" filter="url(#neonGreen)"/>
+    <path d="M-55 -85 Q0 -65 55 -85" fill="none" stroke="#2EE6A8" stroke-width="2" filter="url(#neonGreen)"/>
+
+    <!-- Lemon body - neon gold -->
+    <g transform="translate(0, 5) rotate(-30)" filter="url(#neonGold)">
+      <ellipse cx="0" cy="0" rx="38" ry="28" fill="none" stroke="#FFD700" stroke-width="2.5"/>
+      <path d="M-36 -4 Q-46 0 -36 4" fill="none" stroke="#FFD700" stroke-width="2.5"/>
+      <path d="M36 -4 Q46 0 36 4" fill="none" stroke="#FFD700" stroke-width="2.5"/>
+    </g>
+
+    <!-- Stem -->
+    <path d="M18 -25 Q22 -50 15 -60" fill="none" stroke="#2EE6A8" stroke-width="2" stroke-linecap="round" filter="url(#neonGreen)"/>
+
+    <!-- Leaf 1 -->
+    <path d="M15 -58 Q35 -72 28 -48 Q22 -55 15 -58 Z" fill="none" stroke="#2EE6A8" stroke-width="2" filter="url(#neonGreen)"/>
+    <path d="M17 -56 Q26 -62 26 -52" fill="none" stroke="#2EE6A8" stroke-width="1.2" filter="url(#neonGreen)"/>
+
+    <!-- Leaf 2 -->
+    <path d="M17 -52 Q0 -68 10 -44 Q12 -50 17 -52 Z" fill="none" stroke="#2EE6A8" stroke-width="2" filter="url(#neonGreen)"/>
+    <path d="M15 -50 Q8 -58 11 -46" fill="none" stroke="#2EE6A8" stroke-width="1.2" filter="url(#neonGreen)"/>
+  </g>
+
+  <!-- CANOPY text - neon -->
+  <text x="250" y="360" text-anchor="middle" font-family="'Georgia', 'Times New Roman', 'Playfair Display', serif" font-weight="700" font-size="58" fill="#FFD700" letter-spacing="6" filter="url(#textGlow)">CANOPY</text>
+
+  <!-- ACADEMY subtitle -->
+  <text x="250" y="400" text-anchor="middle" font-family="'Georgia', 'Times New Roman', 'Playfair Display', serif" font-weight="400" font-size="24" fill="#2EE6A8" letter-spacing="12" filter="url(#textGlow)">ACADEMY</text>
+</svg>
