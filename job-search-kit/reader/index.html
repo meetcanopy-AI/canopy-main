@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Job Search Kit for Women — Canopy Reader</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+:root{
+  --paper:#f5efe5;
+  --paper2:#fbf6ee;
+  --sheet:#fffaf1;
+  --ink:#201813;
+  --espresso:#2d211a;
+  --moss:#5c6144;
+  --olive:#74785a;
+  --clay:#a4634b;
+  --sand:#d7c3aa;
+  --muted:#6f6258;
+  --line:rgba(45,33,26,.16);
+  --shadow:0 28px 70px rgba(45,33,26,.11);
+  --radius:28px;
+  --reader-font:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{
+  margin:0;
+  color:var(--ink);
+  background:radial-gradient(circle at 14% 0%,rgba(164,99,75,.10),transparent 28rem),linear-gradient(180deg,var(--paper),var(--paper2) 48%,#e8dccb);
+  font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+a{color:inherit;text-decoration:none}button{font:inherit}.progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--clay);z-index:100}
+.reader-header{position:sticky;top:0;z-index:80;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,4vw,44px);border-bottom:1px solid var(--line);background:rgba(245,239,229,.88);backdrop-filter:blur(18px)}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em}.brand-mark{width:34px;height:34px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:"Instrument Serif",Georgia,serif;font-size:22px}.reader-actions{display:flex;gap:10px;align-items:center}.pill-btn{border:1px solid var(--line);background:rgba(255,250,241,.62);border-radius:999px;padding:10px 14px;color:#46382e;font-weight:800;font-size:13px;cursor:pointer}.pill-btn.dark{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+.layout{display:grid;grid-template-columns:280px minmax(0,760px) 220px;gap:34px;align-items:start;max-width:1360px;margin:0 auto;padding:34px clamp(16px,3vw,34px) 80px}.sidebar{position:sticky;top:82px;max-height:calc(100vh - 100px);overflow:auto;padding:20px;border:1px solid var(--line);border-radius:22px;background:rgba(255,250,241,.48)}.sidebar p{margin:0 0 14px;color:var(--moss);font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.sidebar nav{display:grid;gap:4px}.sidebar a{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:start;padding:9px 8px;border-radius:12px;color:#64574b;font-size:13px;line-height:1.25}.sidebar a span{font-family:"Instrument Serif",Georgia,serif;font-size:20px;line-height:.95;color:var(--clay)}.sidebar a.active,.sidebar a:hover{background:#efe3d2;color:var(--ink)}
+.book{min-width:0}.cover{min-height:calc(100vh - 120px);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(34px,7vw,74px);margin-bottom:22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--sheet);box-shadow:var(--shadow);position:relative;overflow:hidden}.cover:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 8%,rgba(116,120,90,.12),transparent 18rem);pointer-events:none}.cover>*{position:relative}.cover-kicker{color:var(--moss);font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;margin:0}.cover h1{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(58px,9vw,104px);line-height:.9;letter-spacing:-.055em;font-weight:400;margin:56px 0 20px}.cover-lede{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(28px,4vw,42px);line-height:1.04;letter-spacing:-.035em;color:#3b3028;max-width:680px;margin:0}.cover-note{max-width:620px;margin-top:30px;padding-top:22px;border-top:1px solid var(--line);font-size:18px;color:#5a4c40}.cover-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:46px}.cover-card{border:1px solid var(--line);padding:18px;background:rgba(255,255,255,.26)}.cover-card span{display:block;color:var(--moss);font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin-bottom:8px}.cover-card strong{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.05}
+.reader-card{padding:clamp(28px,5vw,58px);margin-bottom:22px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,250,241,.82);box-shadow:0 18px 44px rgba(45,33,26,.07)}.reader-section{scroll-margin-top:96px}.chapter-kicker{color:var(--clay);font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;margin:0 0 12px}.reader-card h2{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(42px,6vw,68px);line-height:.98;letter-spacing:-.05em;font-weight:400;margin:0 0 22px;color:var(--ink)}.reader-card h3{font-size:clamp(24px,3vw,34px);letter-spacing:-.035em;line-height:1.05;margin:34px 0 14px;color:#2b211b}.reader-card p,.reader-card li{font-size:var(--reader-font);color:#51463c}.reader-card p{margin:0 0 16px}.reader-card ul,.reader-card ol{padding-left:22px;margin:12px 0 20px}.reader-card li{margin:7px 0}.reader-card strong{color:var(--ink)}.reader-card hr,.section-break{display:none}.fill-line{list-style:none;border-bottom:1px solid rgba(45,33,26,.22);height:28px;margin-left:-18px;color:transparent}.reader-card p:has(strong:only-child){margin-top:18px;color:var(--ink)}
+.prompt-card{margin:22px 0;border:1px solid rgba(92,97,68,.28);background:#f0e5d5;border-radius:18px;overflow:hidden}.prompt-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 16px;background:#e5d6bf;border-bottom:1px solid rgba(92,97,68,.22)}.prompt-topline span{color:var(--moss);font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.copy-btn{border:1px solid rgba(45,33,26,.18);background:var(--sheet);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;color:var(--espresso);cursor:pointer}.copy-btn.copied{background:var(--moss);color:var(--sheet)}pre{margin:0;white-space:pre-wrap;word-break:break-word;padding:20px;font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#2a241e}.reader-footer-nav{display:flex;justify-content:space-between;gap:14px;margin:22px 0 0}.reader-footer-nav a{flex:1;border:1px solid var(--line);background:rgba(255,250,241,.62);border-radius:16px;padding:14px 16px;font-weight:900;color:#473a31}.reader-footer-nav a:last-child{text-align:right}.toolbox{position:sticky;top:82px;display:grid;gap:12px}.tool-card{border:1px solid var(--line);border-radius:22px;background:rgba(255,250,241,.50);padding:18px}.tool-card h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:28px;line-height:1;margin:0 0 10px}.tool-card p{font-size:14px;color:var(--muted);margin:0 0 14px}.mini-action{display:block;text-align:center;border-radius:999px;background:var(--espresso);color:var(--sheet);font-weight:900;padding:12px 14px;font-size:13px}.font-controls{display:flex;gap:8px}.font-controls button{flex:1;border:1px solid var(--line);background:var(--sheet);border-radius:999px;padding:9px;font-weight:900;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--sheet);border-radius:999px;padding:11px 16px;font-weight:900;z-index:100;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:1080px){.layout{grid-template-columns:1fr}.sidebar{position:static;max-height:none}.sidebar nav{grid-template-columns:repeat(2,1fr)}.toolbox{position:static;grid-template-columns:1fr 1fr}.book{order:-1}}
+@media(max-width:700px){.reader-header{align-items:center;flex-wrap:wrap}.brand{min-width:110px}.reader-actions{gap:6px;max-width:100%;overflow:auto;padding-bottom:2px}.pill-btn{padding:9px 11px;white-space:nowrap;font-size:12px}.layout{padding:16px 0 60px}.cover,.reader-card{border-radius:0;border-left:0;border-right:0;margin-bottom:12px}.cover{min-height:auto;padding:34px 24px}.reader-card{padding:32px 24px}.cover-grid,.toolbox{grid-template-columns:1fr}.sidebar{display:none}.reader-card p,.reader-card li{font-size:17px}.reader-card h2{font-size:34px;line-height:1.02;letter-spacing:-.04em}.reader-card h3{font-size:25px}.prompt-topline{align-items:flex-start;flex-direction:column}.copy-btn{width:100%}.reader-footer-nav{flex-direction:column}.reader-footer-nav a:last-child{text-align:left}.cover h1{font-size:38px;line-height:1;letter-spacing:-.045em;overflow-wrap:normal}.cover-lede{font-size:22px;line-height:1.12}.cover-note{font-size:16px}.cover-card strong{font-size:22px}}
+</style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="reader-header">
+    <a class="brand" href="../../../index.html"><span class="brand-mark">C</span><span>Canopy</span></a>
+    <div class="reader-actions">
+      <a class="pill-btn" href="ai-job-search-kit-for-women-sellable.pdf" download>Download PDF</a>
+      <a class="pill-btn dark" href="mailto:meetcanopy@gmail.com?subject=AI%20Job%20Search%20Kit%20question">Ask Stephanie</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Reader chapters">
+      <p>Chapters</p>
+      <nav><a href="#for-women-who-need-better-work-without-starting-from-zero" data-section="for-women-who-need-better-work-without-starting-from-zero"><span>01</span>For women who need better work without starting from zero</a>
+<a href="#how-to-use-this-kit-in-one-sitting" data-section="how-to-use-this-kit-in-one-sitting"><span>02</span>How to use this kit in one sitting</a>
+<a href="#before-you-paste-anything-into-ai" data-section="before-you-paste-anything-into-ai"><span>03</span>Before you paste anything into AI</a>
+<a href="#part-1-pick-your-target-lane" data-section="part-1-pick-your-target-lane"><span>04</span>1 · Pick your target lane</a>
+<a href="#part-2-resume-audit" data-section="part-2-resume-audit"><span>05</span>2 · Resume audit</a>
+<a href="#part-3-linkedin-refresh" data-section="part-3-linkedin-refresh"><span>06</span>3 · LinkedIn refresh</a>
+<a href="#part-4-remote-job-search-filters" data-section="part-4-remote-job-search-filters"><span>07</span>4 · Remote job search filters</a>
+<a href="#part-5-outreach-without-sounding-desperate" data-section="part-5-outreach-without-sounding-desperate"><span>08</span>5 · Outreach without sounding desperate</a>
+<a href="#part-6-interview-prep" data-section="part-6-interview-prep"><span>09</span>6 · Interview prep</a>
+<a href="#part-7-application-tracker" data-section="part-7-application-tracker"><span>10</span>7 · Application tracker</a>
+<a href="#part-8-the-7-day-reset-plan" data-section="part-8-the-7-day-reset-plan"><span>11</span>8 · The 7-day reset plan</a>
+<a href="#your-one-page-job-search-brief" data-section="your-one-page-job-search-brief"><span>12</span>Your one-page job search brief</a>
+<a href="#final-note" data-section="final-note"><span>13</span>Final note</a></nav>
+    </aside>
+
+    <main class="book" id="reader">
+      <section class="cover" aria-label="Cover">
+        <div>
+          <p class="cover-kicker">Canopy private reader</p>
+          <h1>AI Job Search Kit for Women</h1>
+          <p class="cover-lede">A calmer way to rebuild your resume, LinkedIn, applications, and interview prep with AI.</p>
+          <p class="cover-note">Read straight through like a small digital book, or jump to the chapter you need. Every prompt is copyable.</p>
+          <div class="cover-grid">
+            <div class="cover-card"><span>Best for</span><strong>Remote searches, pivots, and getting unstuck.</strong></div>
+            <div class="cover-card"><span>Use time</span><strong>One focused 90-minute reset.</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <article class="reader-card">
+        <section class="reader-section" data-section="for-women-who-need-better-work-without-starting-from-zero"><p class="chapter-kicker">Chapter 01</p><h2 id="for-women-who-need-better-work-without-starting-from-zero">For
+women who need better work without starting from zero</h2>
+<p>This kit is for the woman who knows she needs to make a move, but is
+too tired to rebuild her resume, LinkedIn, applications, and interview
+prep from scratch.</p>
+<p>You do not need to become an AI expert. You need a clear direction,
+better words for your experience, and a repeatable way to apply without
+spiraling.</p>
+<p><strong>Best for:</strong> remote job searches, career pivots, women
+returning to the market, HR/admin/operations/customer
+support/marketing/general business roles, and anyone who needs practical
+materials fast.</p>
+<p><strong>Goal for one sitting:</strong></p>
+<p>By the end, you should know:</p>
+<ul>
+<li>what roles you are actually targeting</li>
+<li>what your resume should emphasize</li>
+<li>what your LinkedIn should say</li>
+<li>what to use as your basic outreach message</li>
+<li>how to prep for interviews without freezing</li>
+<li>how to track applications without chaos</li>
+</ul>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="how-to-use-this-kit-in-one-sitting"><p class="chapter-kicker">Chapter 02</p><h2 id="how-to-use-this-kit-in-one-sitting">How to use this kit in one
+sitting</h2>
+<p>Set a timer for 90 minutes.</p>
+<ol type="1">
+<li><strong>15 minutes:</strong> choose your target roles.</li>
+<li><strong>20 minutes:</strong> audit your resume.</li>
+<li><strong>20 minutes:</strong> refresh your LinkedIn headline and
+About section.</li>
+<li><strong>15 minutes:</strong> build your remote job search
+filters.</li>
+<li><strong>10 minutes:</strong> create one outreach message.</li>
+<li><strong>10 minutes:</strong> prep three interview stories.</li>
+</ol>
+<p>Do not try to make everything perfect. The first win is clarity. You
+can polish later.</p>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="before-you-paste-anything-into-ai"><p class="chapter-kicker">Chapter 03</p><h2 id="before-you-paste-anything-into-ai">Before you paste anything
+into AI</h2>
+<p>AI gives better answers when you give it context.</p>
+<p>Copy and fill this first:</p>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>I am job searching and I want practical help, not generic career advice.
+
+My current or most recent role:
+My industry:
+My strongest tasks/responsibilities:
+Tools I have used:
+Types of roles I am considering:
+Remote / hybrid / onsite preference:
+Salary range or minimum:
+Things I do not want in my next job:
+Tone I want for my materials: clear, confident, human, not fake or overly corporate.</code></pre>
+</div>
+<p>Use that context at the top of every prompt in this kit.</p>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-1-pick-your-target-lane"><p class="chapter-kicker">Chapter 04</p><h2 id="part-1-pick-your-target-lane">Part 1: Pick your target lane</h2>
+<p>Most job searches feel chaotic because the target is too broad.</p>
+<p>You are not “open to anything.” You are choosing a lane so your
+resume, LinkedIn, and applications tell the same story.</p>
+<h3 id="worksheet-role-fit-map">Worksheet: role fit map</h3>
+<p>Fill this out before asking AI for help.</p>
+<p><strong>Roles I have done before:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>Tasks I am good at:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>Tasks I do not want more of:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>Tools or systems I know:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>Industries I understand:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>Roles I am curious about:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>Remote-friendly roles that may fit me:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<h3 id="prompt-find-my-best-fit-roles">Prompt: find my best-fit
+roles</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Using the context below, help me identify 5 realistic job titles I should target.
+
+Do not give me dream-job fluff. Prioritize roles that match my existing experience and could reasonably be remote or hybrid.
+
+For each role, give me:
+1. why it fits me
+2. what parts of my experience to emphasize
+3. what keywords I should use on my resume and LinkedIn
+4. possible salary range language to research
+5. any skill gap I should close quickly
+
+Here is my background:
+[paste your context + worksheet answers]</code></pre>
+</div>
+<h3 id="decision-rule">Decision rule</h3>
+<p>Choose <strong>2 primary roles</strong> and <strong>1 backup
+role</strong>.</p>
+<p>If you target 12 roles at once, your materials will sound vague. Pick
+the lane first.</p>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-2-resume-audit"><p class="chapter-kicker">Chapter 05</p><h2 id="part-2-resume-audit">Part 2: Resume audit</h2>
+<p>Your resume is not your life story. It is a relevance document.</p>
+<p>Every bullet should answer: <strong>why should this person trust me
+for this role?</strong></p>
+<h3 id="resume-audit-checklist">Resume audit checklist</h3>
+<p>Go through your resume and mark yes/no:</p>
+<ul>
+<li>Is my target role obvious within 10 seconds?</li>
+<li>Does the top section match the jobs I am applying for?</li>
+<li>Do my bullets show outcomes, not just duties?</li>
+<li>Did I include tools, systems, departments, volume, or scope?</li>
+<li>Is anything outdated, distracting, or too personal?</li>
+<li>Are my strongest responsibilities buried too low?</li>
+<li>Do I sound like a real person or like a job description copied
+itself?</li>
+</ul>
+<h3 id="prompt-resume-positioning-audit">Prompt: resume positioning
+audit</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Act as a practical resume strategist for women applying to better or remote work.
+
+I am targeting these roles:
+[role 1]
+[role 2]
+[backup role]
+
+Review my resume for positioning, clarity, and relevance.
+
+Tell me:
+1. what the resume currently makes me look qualified for
+2. what is unclear or too generic
+3. which bullets should be rewritten first
+4. what keywords I am missing for my target roles
+5. what I should remove or reduce
+6. a stronger summary section in my voice
+
+Use direct language. Do not make me sound fake, inflated, or overly corporate.
+
+Here is my resume:
+[paste resume]</code></pre>
+</div>
+<h3 id="prompt-rewrite-weak-bullets">Prompt: rewrite weak bullets</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Rewrite these resume bullets so they sound stronger, clearer, and more results-oriented without inventing numbers or lying.
+
+Target role: [target role]
+Tone: confident, specific, human, not robotic.
+
+For each bullet:
+- keep it truthful
+- make the work sound more valuable
+- add scope if the original includes it
+- suggest where I could add a real number if I know it
+
+Current bullets:
+[paste bullets]</code></pre>
+</div>
+<h3 id="bullet-formula">Bullet formula</h3>
+<p>Use this structure when you get stuck:</p>
+<p><strong>Did what + for whom/what + using what + result or
+purpose</strong></p>
+<p>Examples:</p>
+<ul>
+<li>Managed weekly onboarding tasks for new hires across multiple store
+locations, keeping documents, reminders, and manager follow-up
+organized.</li>
+<li>Coordinated scheduling and employee communication between leadership
+and store teams to reduce missed updates and last-minute confusion.</li>
+<li>Maintained HR files, compliance documents, and internal records with
+a focus on accuracy, privacy, and fast retrieval.</li>
+</ul>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-3-linkedin-refresh"><p class="chapter-kicker">Chapter 06</p><h2 id="part-3-linkedin-refresh">Part 3: LinkedIn refresh</h2>
+<p>LinkedIn should make your target obvious. It does not need to sound
+like a TED Talk.</p>
+<h3 id="linkedin-headline-options">LinkedIn headline options</h3>
+<p>Use this prompt:</p>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Write 10 LinkedIn headline options for me.
+
+Target roles:
+[role 1]
+[role 2]
+
+My background:
+[paste short context]
+
+Rules:
+- no buzzwords like guru, ninja, visionary, or passionate professional
+- make me sound credible and human
+- include keywords recruiters might search
+- give me a mix of straightforward, warm, and slightly more polished options</code></pre>
+</div>
+<p>Pick one that feels clear, not clever.</p>
+<h3 id="linkedin-about-section-prompt">LinkedIn About section
+prompt</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Write a LinkedIn About section for me based on the context below.
+
+I want it to sound like a real professional woman, not a corporate template.
+
+Structure:
+1. first line: what I help with or what kind of work I do
+2. short paragraph about my experience
+3. short paragraph about what I am looking for next
+4. short list of strengths/tools/areas
+5. simple closing line inviting relevant opportunities
+
+Avoid inflated claims. Keep it clear, warm, and practical.
+
+Context:
+[paste background, target roles, strengths, tools]</code></pre>
+</div>
+<h3 id="featured-section-idea">Featured section idea</h3>
+<p>If you do not have a portfolio, use your Featured section for:</p>
+<ul>
+<li>a short resume PDF</li>
+<li>a simple one-page work sample</li>
+<li>a post about the type of work you are seeking</li>
+<li>a certification or project if relevant</li>
+</ul>
+<p>Do not overload it. One to three items is enough.</p>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-4-remote-job-search-filters"><p class="chapter-kicker">Chapter 07</p><h2 id="part-4-remote-job-search-filters">Part 4: Remote job search
+filters</h2>
+<p>Remote job searching gets messy fast. Your filters matter.</p>
+<h3 id="good-search-phrases">Good search phrases</h3>
+<p>Try combinations like:</p>
+<ul>
+<li>remote HR coordinator</li>
+<li>remote HR assistant</li>
+<li>remote people operations coordinator</li>
+<li>remote recruiting coordinator</li>
+<li>remote operations coordinator</li>
+<li>remote administrative coordinator</li>
+<li>remote customer operations</li>
+<li>remote client success coordinator</li>
+<li>remote executive assistant operations</li>
+<li>remote onboarding coordinator</li>
+<li>remote employee experience coordinator</li>
+<li>remote compliance coordinator</li>
+<li>remote training coordinator</li>
+</ul>
+<p>Swap in your industry or tools:</p>
+<ul>
+<li>healthcare</li>
+<li>retail</li>
+<li>hospitality</li>
+<li>SaaS</li>
+<li>nonprofit</li>
+<li>payroll</li>
+<li>onboarding</li>
+<li>scheduling</li>
+<li>compliance</li>
+<li>employee relations</li>
+</ul>
+<h3 id="prompt-build-my-job-search-query-list">Prompt: build my job
+search query list</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Create a job search query list for me.
+
+My target roles are:
+[roles]
+
+My must-haves:
+[remote/hybrid, salary minimum, schedule, industry preferences]
+
+My background:
+[paste context]
+
+Give me:
+1. 20 exact job search phrases to use on LinkedIn, Indeed, Google, and company sites
+2. 10 role titles I may not know to search for
+3. red flags to avoid
+4. keywords to add to my resume and LinkedIn
+5. a simple weekly search plan</code></pre>
+</div>
+<h3 id="remote-job-red-flags">Remote job red flags</h3>
+<p>Be careful with:</p>
+<ul>
+<li>“commission only” unless you truly want sales</li>
+<li>vague assistant roles with no company info</li>
+<li>jobs asking for payment, equipment purchase, or crypto setup</li>
+<li>remote listings with no salary range and huge responsibilities</li>
+<li>“must be available 24/7” language</li>
+<li>companies with no real website or employee footprint</li>
+</ul>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-5-outreach-without-sounding-desperate"><p class="chapter-kicker">Chapter 08</p><h2 id="part-5-outreach-without-sounding-desperate">Part 5: Outreach
+without sounding desperate</h2>
+<p>You do not need a dramatic networking message. You need a short,
+normal note.</p>
+<h3 id="recruiter-message">Recruiter message</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Hi [Name], I saw the [role title] opening and wanted to reach out directly. My background is in [your lane], especially [strength 1], [strength 2], and [strength 3]. I’m looking for a remote or hybrid role where I can support [team/function/outcome]. I applied and would love to be considered if the role is still active. Thank you.</code></pre>
+</div>
+<h3 id="warm-connection-message">Warm connection message</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Hi [Name], I’m exploring remote roles in [target area] and thought of you because of your work in [company/industry]. If you see anything aligned with [role type], I’d be grateful if you kept me in mind. No pressure at all. I’m mainly trying to be more intentional with my search.</code></pre>
+</div>
+<h3 id="prompt-customize-my-outreach">Prompt: customize my outreach</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Write 5 short LinkedIn outreach messages for me.
+
+Context:
+- I am applying for: [role]
+- Company: [company]
+- Why I am interested: [reason]
+- My relevant experience: [experience]
+
+Rules:
+- under 90 words
+- human and calm
+- not needy
+- not fake excited
+- no em dashes
+- include one version for a recruiter, one for a hiring manager, one for a warm connection, one after applying, and one follow-up</code></pre>
+</div>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-6-interview-prep"><p class="chapter-kicker">Chapter 09</p><h2 id="part-6-interview-prep">Part 6: Interview prep</h2>
+<p>Interviews get easier when you have stories ready.</p>
+<p>Prepare three stories:</p>
+<ol type="1">
+<li>A time you organized something messy.</li>
+<li>A time you handled a difficult person or situation.</li>
+<li>A time you learned a tool, process, or responsibility quickly.</li>
+</ol>
+<h3 id="story-worksheet">Story worksheet</h3>
+<p><strong>Situation:</strong> what was happening?</p>
+<p><strong>Task:</strong> what were you responsible for?</p>
+<p><strong>Action:</strong> what did you do?</p>
+<p><strong>Result:</strong> what changed, improved, got completed, or
+became clearer?</p>
+<h3 id="prompt-build-my-interview-stories">Prompt: build my interview
+stories</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Help me turn these work experiences into interview stories using the STAR format.
+
+Target role: [role]
+Tone: clear, professional, not rehearsed.
+
+For each story:
+1. write a 60-second version
+2. write a shorter 30-second version
+3. list the interview questions this story could answer
+4. suggest one detail I should add if I know it
+
+Experiences:
+[paste 3 situations]</code></pre>
+</div>
+<h3 id="questions-to-practice">Questions to practice</h3>
+<ul>
+<li>Tell me about yourself.</li>
+<li>Why are you interested in this role?</li>
+<li>Why are you leaving your current role?</li>
+<li>Tell me about a time you handled a difficult situation.</li>
+<li>How do you stay organized while working remotely?</li>
+<li>What tools or systems have you used?</li>
+<li>What type of manager helps you do your best work?</li>
+<li>What are your salary expectations?</li>
+</ul>
+<h3 id="salary-language">Salary language</h3>
+<div class="prompt-card">
+  <div class="prompt-topline"><span>Copy/paste prompt</span><button type="button" class="copy-btn">Copy prompt</button></div>
+  <pre class="text"><code>Based on the role scope and my experience, I’m targeting a range around [range], but I’m open to discussing the full package and expectations for the position.</code></pre>
+</div>
+<p>Do not give your lowest number first unless you have to.</p>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-7-application-tracker"><p class="chapter-kicker">Chapter 10</p><h2 id="part-7-application-tracker">Part 7: Application tracker</h2>
+<p>Use a simple tracker. Do not create a second job called “managing the
+spreadsheet.”</p>
+<p>Columns:</p>
+<ul>
+<li>Company</li>
+<li>Role</li>
+<li>Link</li>
+<li>Salary/range</li>
+<li>Remote/hybrid/onsite</li>
+<li>Date applied</li>
+<li>Resume version used</li>
+<li>Contact person</li>
+<li>Follow-up date</li>
+<li>Status</li>
+<li>Notes/red flags</li>
+</ul>
+<h3 id="weekly-rhythm">Weekly rhythm</h3>
+<p><strong>Monday:</strong> search and save roles.</p>
+<p><strong>Tuesday/Wednesday:</strong> apply to best-fit roles.</p>
+<p><strong>Thursday:</strong> outreach/follow-ups.</p>
+<p><strong>Friday:</strong> update tracker and improve one
+resume/LinkedIn section.</p>
+<p>Aim for quality, not panic-applying to 100 jobs that do not fit.</p>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="part-8-the-7-day-reset-plan"><p class="chapter-kicker">Chapter 11</p><h2 id="part-8-the-7-day-reset-plan">Part 8: The 7-day reset plan</h2>
+<h3 id="day-1-choose-target-roles">Day 1: choose target roles</h3>
+<p>Pick 2 primary roles and 1 backup role.</p>
+<h3 id="day-2-resume-audit">Day 2: resume audit</h3>
+<p>Rewrite your summary and 5 weakest bullets.</p>
+<h3 id="day-3-linkedin-refresh">Day 3: LinkedIn refresh</h3>
+<p>Update headline, About section, and top experience bullets.</p>
+<h3 id="day-4-job-search-filters">Day 4: job search filters</h3>
+<p>Build your list of exact search phrases and save 15 roles.</p>
+<h3 id="day-5-apply-intentionally">Day 5: apply intentionally</h3>
+<p>Apply to 5 strong-fit roles with the right resume version.</p>
+<h3 id="day-6-outreach">Day 6: outreach</h3>
+<p>Send 5 calm messages.</p>
+<h3 id="day-7-interview-prep">Day 7: interview prep</h3>
+<p>Write three STAR stories and practice your “tell me about
+yourself.”</p>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="your-one-page-job-search-brief"><p class="chapter-kicker">Chapter 12</p><h2 id="your-one-page-job-search-brief">Your one-page job search
+brief</h2>
+<p>Use this as your command center.</p>
+<p><strong>Target role 1:</strong></p>
+<p><strong>Target role 2:</strong></p>
+<p><strong>Backup role:</strong></p>
+<p><strong>Remote/hybrid preference:</strong></p>
+<p><strong>Salary target:</strong></p>
+<p><strong>Industries I prefer:</strong></p>
+<p><strong>Industries I want to avoid:</strong></p>
+<p><strong>Top 5 strengths:</strong></p>
+<ol type="1">
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ol>
+<p><strong>Tools/systems:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>Resume keywords to include:</strong></p>
+<ul>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ul>
+<p><strong>LinkedIn headline:</strong></p>
+<p><strong>Outreach message I will use:</strong></p>
+<p><strong>Three interview stories:</strong></p>
+<ol type="1">
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+<li class="fill-line"><span></span></li>
+</ol>
+</section><hr class="section-break" />
+<section class="reader-section" data-section="final-note"><p class="chapter-kicker">Chapter 13</p><h2 id="final-note">Final note</h2>
+<p>You are not behind. You are overwhelmed because the process has too
+many moving pieces.</p>
+<p>The goal is not to become a perfect applicant. The goal is to become
+easier to understand, easier to refer, and easier to match to the right
+role.</p>
+<p>Use AI to reduce the blank page. Keep your judgment. Keep your voice.
+Apply with a plan.</p>
+</section>
+        <div class="reader-footer-nav"><a href="#reader">↑ Back to top</a><a href="ai-job-search-kit-for-women-sellable.pdf" download>Download the PDF →</a></div>
+      </article>
+    </main>
+
+    <aside class="toolbox" aria-label="Reader tools">
+      <div class="tool-card">
+        <h2>Reader tools</h2>
+        <p>Adjust the text size while you work through the guide.</p>
+        <div class="font-controls"><button type="button" data-font="minus">A-</button><button type="button" data-font="plus">A+</button></div>
+      </div>
+      <div class="tool-card">
+        <h2>Use it fast</h2>
+        <p>Start with the context prompt, then move chapter by chapter. Do not perfect everything on the first pass.</p>
+        <a class="mini-action" href="#before-you-paste-anything-into-ai">Start the prompts</a>
+      </div>
+    </aside>
+  </div>
+  <div class="toast">Prompt copied</div>
+  <script>
+const progress = document.querySelector('.progress');
+const navLinks = [...document.querySelectorAll('.sidebar a')];
+const sections = [...document.querySelectorAll('.reader-section')];
+const toast = document.querySelector('.toast');
+function updateProgress(){
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - doc.clientHeight;
+  const pct = max ? (doc.scrollTop / max) * 100 : 0;
+  progress.style.width = pct + '%';
+}
+function updateActive(){
+  let current = sections[0]?.dataset.section;
+  for (const section of sections){
+    if (section.getBoundingClientRect().top < 140) current = section.dataset.section;
+  }
+  navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === current));
+}
+window.addEventListener('scroll', () => { updateProgress(); updateActive(); }, {passive:true});
+updateProgress(); updateActive();
+
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const code = btn.closest('.prompt-card').querySelector('code').innerText;
+    try { await navigator.clipboard.writeText(code); }
+    catch(e){
+      const ta = document.createElement('textarea'); ta.value = code; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    btn.classList.add('copied'); btn.textContent = 'Copied';
+    toast.classList.add('show');
+    setTimeout(()=>{ btn.classList.remove('copied'); btn.textContent='Copy prompt'; toast.classList.remove('show'); }, 1400);
+  });
+});
+
+const root = document.documentElement;
+let size = Number(localStorage.getItem('canopyReaderFont') || 18);
+function setSize(next){ size = Math.min(22, Math.max(16, next)); root.style.setProperty('--reader-font', size + 'px'); localStorage.setItem('canopyReaderFont', size); }
+setSize(size);
+document.querySelector('[data-font="minus"]').addEventListener('click',()=>setSize(size-1));
+document.querySelector('[data-font="plus"]').addEventListener('click',()=>setSize(size+1));
+</script>
+</body>
+</html>
