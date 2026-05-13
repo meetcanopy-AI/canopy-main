@@ -33,7 +33,7 @@ for i, (hid, title) in enumerate(headings):
     clean = re.sub('<.*?>', '', title)
     clean = re.sub(r'\s+', ' ', clean).strip()
     label = clean.replace('Part ', '').replace(': ', ' · ')
-    nav_items.append(f'<a href="#{hid}" data-section="{hid}"><span>{i+1:02d}</span>{html.escape(label)}</a>')
+    nav_items.append(f'<a href="#{hid}" data-section="{hid}" data-page-index="{i+1}"><span>{i+1:02d}</span>{html.escape(label)}</a>')
 nav_html = '\n'.join(nav_items)
 
 # Insert small chapter numbers before H2s for reader rhythm.
@@ -87,30 +87,69 @@ a{color:inherit;text-decoration:none}button{font:inherit}.progress{position:fixe
 .reader-card{padding:clamp(28px,5vw,58px);margin-bottom:22px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,250,241,.82);box-shadow:0 18px 44px rgba(45,33,26,.07)}.reader-section{scroll-margin-top:96px}.chapter-kicker{color:var(--clay);font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;margin:0 0 12px}.reader-card h2{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(42px,6vw,68px);line-height:.98;letter-spacing:-.05em;font-weight:400;margin:0 0 22px;color:var(--ink)}.reader-card h3{font-size:clamp(24px,3vw,34px);letter-spacing:-.035em;line-height:1.05;margin:34px 0 14px;color:#2b211b}.reader-card p,.reader-card li{font-size:var(--reader-font);color:#51463c}.reader-card p{margin:0 0 16px}.reader-card ul,.reader-card ol{padding-left:22px;margin:12px 0 20px}.reader-card li{margin:7px 0}.reader-card strong{color:var(--ink)}.reader-card hr,.section-break{display:none}.fill-line{list-style:none;border-bottom:1px solid rgba(45,33,26,.22);height:28px;margin-left:-18px;color:transparent}.reader-card p:has(strong:only-child){margin-top:18px;color:var(--ink)}
 .prompt-card{margin:22px 0;border:1px solid rgba(92,97,68,.28);background:#f0e5d5;border-radius:18px;overflow:hidden}.prompt-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 16px;background:#e5d6bf;border-bottom:1px solid rgba(92,97,68,.22)}.prompt-topline span{color:var(--moss);font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.copy-btn{border:1px solid rgba(45,33,26,.18);background:var(--sheet);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;color:var(--espresso);cursor:pointer}.copy-btn.copied{background:var(--moss);color:var(--sheet)}pre{margin:0;white-space:pre-wrap;word-break:break-word;padding:20px;font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#2a241e}.reader-footer-nav{display:flex;justify-content:space-between;gap:14px;margin:22px 0 0}.reader-footer-nav a{flex:1;border:1px solid var(--line);background:rgba(255,250,241,.62);border-radius:16px;padding:14px 16px;font-weight:900;color:#473a31}.reader-footer-nav a:last-child{text-align:right}.toolbox{position:sticky;top:82px;display:grid;gap:12px}.tool-card{border:1px solid var(--line);border-radius:22px;background:rgba(255,250,241,.50);padding:18px}.tool-card h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:28px;line-height:1;margin:0 0 10px}.tool-card p{font-size:14px;color:var(--muted);margin:0 0 14px}.mini-action{display:block;text-align:center;border-radius:999px;background:var(--espresso);color:var(--sheet);font-weight:900;padding:12px 14px;font-size:13px}.font-controls{display:flex;gap:8px}.font-controls button{flex:1;border:1px solid var(--line);background:var(--sheet);border-radius:999px;padding:9px;font-weight:900;cursor:pointer}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--sheet);border-radius:999px;padding:11px 16px;font-weight:900;z-index:100;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+html,body{height:100%;overflow:hidden}.reader-header{height:63px}.layout{height:calc(100vh - 63px);overflow:hidden}.book{height:100%;display:grid;grid-template-rows:minmax(0,1fr) auto}.reader-page{display:none}.reader-page.active{display:flex}.cover.reader-page.active{min-height:0;height:100%;margin:0}.reader-card{display:block;min-height:0;height:100%;overflow:hidden;margin:0}.reader-section{display:none;height:100%;overflow:auto;padding-right:8px;scrollbar-width:thin}.reader-section.active{display:block}.page-controls{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:14px 2px 0}.page-btn{border:1px solid var(--line);background:rgba(255,250,241,.72);border-radius:999px;padding:11px 16px;font-weight:900;color:#46382e;cursor:pointer}.page-btn:last-child{justify-self:end}.page-btn:disabled{opacity:.38;cursor:not-allowed}.page-count{color:var(--muted);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.sidebar a[data-page-index="0"]{display:none}.mini-action{cursor:pointer}.reader-footer-nav{display:none}
 @media(max-width:1080px){.layout{grid-template-columns:1fr}.sidebar{position:static;max-height:none}.sidebar nav{grid-template-columns:repeat(2,1fr)}.toolbox{position:static;grid-template-columns:1fr 1fr}.book{order:-1}}
-@media(max-width:700px){.reader-header{align-items:center;flex-wrap:wrap}.brand{min-width:110px}.reader-actions{gap:6px;max-width:100%;overflow:auto;padding-bottom:2px}.pill-btn{padding:9px 11px;white-space:nowrap;font-size:12px}.layout{padding:16px 0 60px}.cover,.reader-card{border-radius:0;border-left:0;border-right:0;margin-bottom:12px}.cover{min-height:auto;padding:34px 24px}.reader-card{padding:32px 24px}.cover-grid,.toolbox{grid-template-columns:1fr}.sidebar{display:none}.reader-card p,.reader-card li{font-size:17px}.reader-card h2{font-size:34px;line-height:1.02;letter-spacing:-.04em}.reader-card h3{font-size:25px}.prompt-topline{align-items:flex-start;flex-direction:column}.copy-btn{width:100%}.reader-footer-nav{flex-direction:column}.reader-footer-nav a:last-child{text-align:left}.cover h1{font-size:38px;line-height:1;letter-spacing:-.045em;overflow-wrap:normal}.cover-lede{font-size:22px;line-height:1.12}.cover-note{font-size:16px}.cover-card strong{font-size:22px}}
+@media(max-width:700px){.reader-header{height:auto;min-height:63px;align-items:center;flex-wrap:wrap}.brand{min-width:110px}.reader-actions{gap:6px;max-width:100%;overflow:auto;padding-bottom:2px}.pill-btn{padding:9px 11px;white-space:nowrap;font-size:12px}.layout{height:calc(100vh - 106px);padding:16px 0 18px}.cover,.reader-card{border-radius:0;border-left:0;border-right:0;margin-bottom:0}.cover{min-height:0;padding:34px 24px}.reader-card{padding:32px 24px}.cover-grid,.toolbox{grid-template-columns:1fr}.sidebar{display:none}.toolbox{display:none}.reader-card p,.reader-card li{font-size:17px}.reader-card h2{font-size:34px;line-height:1.02;letter-spacing:-.04em}.reader-card h3{font-size:25px}.prompt-topline{align-items:flex-start;flex-direction:column}.copy-btn{width:100%}.reader-footer-nav{flex-direction:column}.reader-footer-nav a:last-child{text-align:left}.cover h1{font-size:38px;line-height:1;letter-spacing:-.045em;overflow-wrap:normal}.cover-lede{font-size:22px;line-height:1.12}.cover-note{font-size:16px}.cover-card strong{font-size:22px}.page-controls{padding:10px 16px 0}.page-btn{padding:10px 12px}.page-count{font-size:11px}}
 '''
 
 js = r'''
 const progress = document.querySelector('.progress');
 const navLinks = [...document.querySelectorAll('.sidebar a')];
+const cover = document.querySelector('.cover');
+const readerCard = document.querySelector('.reader-card');
 const sections = [...document.querySelectorAll('.reader-section')];
+const pages = [cover, ...sections];
 const toast = document.querySelector('.toast');
-function updateProgress(){
-  const doc = document.documentElement;
-  const max = doc.scrollHeight - doc.clientHeight;
-  const pct = max ? (doc.scrollTop / max) * 100 : 0;
-  progress.style.width = pct + '%';
+const prevBtn = document.querySelector('[data-page="prev"]');
+const nextBtn = document.querySelector('[data-page="next"]');
+const pageCount = document.querySelector('.page-count');
+let currentPage = Number(localStorage.getItem('canopyReaderPage') || 0);
+
+function clampPage(index){ return Math.min(pages.length - 1, Math.max(0, index)); }
+function pageTitle(index){
+  if (index === 0) return 'Cover';
+  const heading = pages[index].querySelector('h2');
+  return heading ? heading.textContent.replace(/\s+/g, ' ').trim() : `Chapter ${index}`;
 }
-function updateActive(){
-  let current = sections[0]?.dataset.section;
-  for (const section of sections){
-    if (section.getBoundingClientRect().top < 140) current = section.dataset.section;
-  }
-  navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === current));
+function setPage(index){
+  currentPage = clampPage(index);
+  localStorage.setItem('canopyReaderPage', currentPage);
+  cover.classList.toggle('active', currentPage === 0);
+  readerCard.classList.toggle('active', currentPage > 0);
+  sections.forEach((section, i) => {
+    const active = i + 1 === currentPage;
+    section.classList.toggle('active', active);
+    if (active) section.scrollTop = 0;
+  });
+  navLinks.forEach(a => a.classList.toggle('active', Number(a.dataset.pageIndex) === currentPage));
+  progress.style.width = ((currentPage + 1) / pages.length * 100) + '%';
+  prevBtn.disabled = currentPage === 0;
+  nextBtn.disabled = currentPage === pages.length - 1;
+  prevBtn.textContent = currentPage === 0 ? 'Previous' : 'Previous';
+  nextBtn.textContent = currentPage === pages.length - 1 ? 'Finished' : 'Next';
+  pageCount.textContent = `${currentPage + 1} / ${pages.length} · ${pageTitle(currentPage)}`;
 }
-window.addEventListener('scroll', () => { updateProgress(); updateActive(); }, {passive:true});
-updateProgress(); updateActive();
+setPage(currentPage);
+
+prevBtn.addEventListener('click', () => setPage(currentPage - 1));
+nextBtn.addEventListener('click', () => setPage(currentPage + 1));
+navLinks.forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    setPage(Number(link.dataset.pageIndex));
+  });
+});
+document.querySelectorAll('[data-go-to]').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    const target = sections.findIndex(section => section.dataset.section === link.dataset.goTo);
+    if (target >= 0) setPage(target + 1);
+  });
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft') setPage(currentPage - 1);
+  if (event.key === 'ArrowRight') setPage(currentPage + 1);
+});
 
 document.querySelectorAll('.copy-btn').forEach(btn => {
   btn.addEventListener('click', async () => {
@@ -162,7 +201,7 @@ html_doc = f'''<!DOCTYPE html>
     </aside>
 
     <main class="book" id="reader">
-      <section class="cover" aria-label="Cover">
+      <section class="cover reader-page active" aria-label="Cover" data-section="cover">
         <div>
           <p class="cover-kicker">Canopy private reader</p>
           <h1>AI Job Search Kit for Women</h1>
@@ -175,10 +214,15 @@ html_doc = f'''<!DOCTYPE html>
         </div>
       </section>
 
-      <article class="reader-card">
+      <article class="reader-card reader-page">
         {body}
         <div class="reader-footer-nav"><a href="#reader">↑ Back to top</a><a href="ai-job-search-kit-for-women-sellable.pdf" download>Download the PDF →</a></div>
       </article>
+      <nav class="page-controls" aria-label="Reader pages">
+        <button class="page-btn" type="button" data-page="prev">Previous</button>
+        <span class="page-count">1 / {len(headings) + 1} · Cover</span>
+        <button class="page-btn" type="button" data-page="next">Next</button>
+      </nav>
     </main>
 
     <aside class="toolbox" aria-label="Reader tools">
@@ -190,7 +234,7 @@ html_doc = f'''<!DOCTYPE html>
       <div class="tool-card">
         <h2>Use it fast</h2>
         <p>Start with the context prompt, then move chapter by chapter. Do not perfect everything on the first pass.</p>
-        <a class="mini-action" href="#before-you-paste-anything-into-ai">Start the prompts</a>
+        <a class="mini-action" href="#before-you-paste-anything-into-ai" data-go-to="before-you-paste-anything-into-ai">Start the prompts</a>
       </div>
     </aside>
   </div>
